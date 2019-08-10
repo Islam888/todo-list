@@ -11,7 +11,7 @@ class TodoItem extends Component {
                     <button>done</button>
                 </div>
                 <div>
-                    <p>Todo Text</p>
+                    <p>{this.props.item}</p>
                 </div>
             </div>
          );
