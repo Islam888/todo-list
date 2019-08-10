@@ -7,7 +7,8 @@ class TodoInput extends Component {
         const inputItemValue = document.getElementById('todoInput').value;
         const importantCheckValue = document.getElementById('important').checked;
         const urgentCheckValue = document.getElementById('urgent').checked;
-        return this.props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue)
+        const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+        return this.props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue, date)
     } 
 
     handleKeyDown = (e) => {
@@ -15,7 +16,8 @@ class TodoInput extends Component {
             const inputItemValue = e.target.value;
             const importantCheckValue = document.getElementById('important').checked;
             const urgentCheckValue = document.getElementById('urgent').checked;
-            return this.props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue)
+            const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            return this.props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue, date)
         }
     }
     render() { 
