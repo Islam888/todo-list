@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TodoInput from './components/TodoInput'
 import TodoList from './components/TodosList'
+import sha256  from 'sha-256-js'
 import './App.css';
 
 class App extends Component {
@@ -10,13 +11,15 @@ class App extends Component {
   }
 
   //function invoked after click of Add button to add and show a new todo
-  showAddedTodoItem = (todoItem, isImportant, isUrgent) => {
+  showAddedTodoItem = (task, isImportant, isUrgent, date) => {
     this.setState(prevState => ({
       todoItems: prevState.todoItems.concat({
-        todoItem,
-          isImportant,
-          isUrgent,
-          isDone: false,
+        task,
+        isImportant,
+        isUrgent,
+        isDone: false,
+        date, 
+        id: sha256(new Date().toString()) //hashing of the time to get unique id.
       })
     }))
   } 
@@ -24,7 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <TodoInput addTodoItem={this.showAddedTodoItem} />
-        <TodoList TodoItems={this.state.todoItems} />
+        <TodoList todoItems={this.state.todoItems} />
       </div>
     );
   }
