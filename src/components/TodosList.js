@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TodoItem from './TodoItem';
 
-const TodoList = () => {
+const TodoList = (props) => {
     return ( 
         <div>
             <ul>
-                <li>
-                    <TodoItem />
-                </li>
-                <li>
-                    <TodoItem />
-                </li>
-                <li>
-                    <TodoItem />
-                </li>
-                <li>
-                    <TodoItem />
-                </li>
+                {
+                    props.todoItems.map(item => (<li>
+                        <TodoItem  
+                            key={item.id} 
+                            item={item.task} 
+                            important={item.isImportant}
+                            urgent={item.isUrgent}
+                            done={item.isDone}
+                        />
+                    </li>))
+                }
             </ul>
         </div>
      );
