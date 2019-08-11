@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class TodoInput extends Component {
-    state = {  }
-    handleClick = (e) => {
+const TodoInput = (props) => {
+
+    const handleClick = (e) => {
         e.preventDefault()
         const inputItemValue = document.getElementById('todoInput').value;
         if (!inputItemValue) {
@@ -14,11 +14,11 @@ class TodoInput extends Component {
             document.getElementById('todoInput').value = "" //empty the text field
             document.getElementById('important').checked = false //reset checkbox
             document.getElementById('urgent').checked = false //reset checkbox
-            return this.props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue, date)
+            return props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue, date)
         }
     } 
 
-    handleKeyDown = (e) => {
+    const handleKeyDown = (e) => {
         const inputItemValue = e.target.value;
         if (e.keyCode === 13 && inputItemValue) {
             const importantCheckValue = document.getElementById('important').checked;
@@ -27,25 +27,22 @@ class TodoInput extends Component {
             e.target.value = "" //empty the text field
             document.getElementById('important').checked = false //reset checkbox
             document.getElementById('urgent').checked = false //reset checkbox
-            return this.props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue, date)
+            return props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue, date)
         } else {
             return;
         }
     }
 
-
-    render() { 
         return ( 
             <div>   
-                <input type="text" id="todoInput" onKeyDown={this.handleKeyDown} placeholder="Add todo" />
-                <button id="add-button" onClick={this.handleClick}>Add</button>
+                <input type="text" id="todoInput" onKeyDown={handleKeyDown} placeholder="Add todo" />
+                <button id="add-button" onClick={handleClick}>Add</button>
                 <input type="checkbox" id="important" name="priority" />
                 <label htmlFor="important" >important</label>
                 <input type="checkbox" id="urgent" name="priority" />
                 <label htmlFor="urgent" >urgent</label>
             </div>
          );
-    }
 }
  
 export default TodoInput;
