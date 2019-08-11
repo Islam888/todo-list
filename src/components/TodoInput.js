@@ -8,10 +8,12 @@ class TodoInput extends Component {
         if (!inputItemValue) {
             return;
         } else {
-            document.getElementById('todoInput').value = "" //empty the text field
             const importantCheckValue = document.getElementById('important').checked;
             const urgentCheckValue = document.getElementById('urgent').checked;
             const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            document.getElementById('todoInput').value = "" //empty the text field
+            document.getElementById('important').checked = false //reset checkbox
+            document.getElementById('urgent').checked = false //reset checkbox
             return this.props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue, date)
         }
     } 
@@ -19,10 +21,12 @@ class TodoInput extends Component {
     handleKeyDown = (e) => {
         const inputItemValue = e.target.value;
         if (e.keyCode === 13 && inputItemValue) {
-            e.target.value = "" //empty the text field
             const importantCheckValue = document.getElementById('important').checked;
             const urgentCheckValue = document.getElementById('urgent').checked;
             const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            e.target.value = "" //empty the text field
+            document.getElementById('important').checked = false //reset checkbox
+            document.getElementById('urgent').checked = false //reset checkbox
             return this.props.addTodoItem(inputItemValue, importantCheckValue, urgentCheckValue, date)
         } else {
             return;
