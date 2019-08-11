@@ -13,6 +13,9 @@ const TodoList = (props) => {
                                 item.editMode ? (<TodoEdit 
                                                     key={item.id}
                                                     addTodoItem={props.addEditedTodoItem}    
+                                                    value={item.task}
+                                                    important={item.isImportant}
+                                                    urgent={item.isUrgent}
                                                 />) : (
                                     <TodoItem  
                                         key={item.id} 
@@ -24,6 +27,7 @@ const TodoList = (props) => {
                                         removeTodoItem={props.removeTodoItem}
                                         editTodoItem={props.editTodoItem}
                                         editMode={item.editMode}
+                                        markTodoItemDone={props.markDone}
                                     />
                                 )
                             }
