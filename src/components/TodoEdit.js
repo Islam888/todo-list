@@ -34,11 +34,11 @@ class TodoEdit extends Component {
         return ( 
             <div>
                 <div>   
-                <input type="text" id="todoEdit" onKeyDown={this.handleKeyDown} placeholder="Edit todo" />
+                <input type="text" id="todoEdit" onKeyDown={this.handleKeyDown} placeholder="Edit todo" defaultValue={this.props.value} />
                 <button id="edit-button" onClick={this.handleClick}>Add</button>
-                <input type="checkbox" id="important-edit" name="priority" />
+                <input type="checkbox" id="important-edit" name="priority" defaultChecked={this.props.important} />
                 <label htmlFor="important-edit" >important</label>
-                <input type="checkbox" id="urgent-edit" name="priority" />
+                <input type="checkbox" id="urgent-edit" name="priority" defaultChecked={this.props.urgent} />
                 <label htmlFor="urgent-edit" >urgent</label>
             </div>
             </div>
