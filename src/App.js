@@ -80,11 +80,13 @@ class App extends Component {
   }
 
   render() {
+    const { todoItems } = this.state;
+
     return (
       <div className="App">
         <TodoInput addTodoItem={this.showAddedTodoItem} />
         <TodoList 
-          todoItems={this.state.todoItems} 
+          todoItems={todoItems} 
           removeTodoItem={this.removeTodoItem}
           editTodoItem={this.editTodoItem}
           addEditedTodoItem={this.showEditedTodoItem}
