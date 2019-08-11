@@ -25,12 +25,14 @@ class App extends Component {
     }))
   } 
 
+  //remove todo item by filtering out the item which has an id equal to the id of the item with clicked remove button
   removeTodoItem = (id) => {
     this.setState(prevState => ({
       todoItems: prevState.todoItems.filter(item => item.id !== id)
     }))
   }
 
+  //Change the editMode value to true of the item with id of the item edit button clicked 
   editTodoItem = (id) => {
     this.setState(prevState => ({
       todoItems: prevState.todoItems.map(item => {
@@ -44,6 +46,7 @@ class App extends Component {
     }))
   }
 
+  //edit the selected item with the new values
   showEditedTodoItem = (task, isImportant, isUrgent, date) => {
     this.setState(prevState => ({
       todoItems: prevState.todoItems.map(item => {
@@ -52,7 +55,7 @@ class App extends Component {
           item.isImportant = isImportant;
           item.isUrgent = isUrgent;
           item.date = date;
-          item.editMode = false;
+          item.editMode = false; //return back editMode value to false to swipe the TodoEdit component with the TodoItem one.
           return item
         } else {
           return item
@@ -60,6 +63,20 @@ class App extends Component {
       })
     }))
 
+  }
+
+  // To mark an item as done. The function switches isDone to true
+  markDone = (id) => {
+    this.setState(prevState => ({
+      todoItems: prevState.todoItems.map(item => {
+        if (item.id === id) {
+          item.isDone = true
+          return item
+        } else {
+          return item
+        }
+      })
+    }))
   }
 
   render() {
@@ -71,6 +88,7 @@ class App extends Component {
           removeTodoItem={this.removeTodoItem}
           editTodoItem={this.editTodoItem}
           addEditedTodoItem={this.showEditedTodoItem}
+          markDone={this.markDone}
         />
       </div>
     );
