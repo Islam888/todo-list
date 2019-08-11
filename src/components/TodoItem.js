@@ -7,7 +7,7 @@ class TodoItem extends Component {
 
     handleEditBtnClick = () => this.props.editTodoItem(this.props.id)
 
-    handleDoneBtnClick = () => this.props.markeTodoItemDone(this.props.id)
+    handleDoneBtnClick = () => this.props.markTodoItemDone(this.props.id)
 
     render() { 
         return ( 
