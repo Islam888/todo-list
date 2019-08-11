@@ -1,29 +1,26 @@
-import React, { Component } from 'react';
+import React from "react";
 
-class TodoItem extends Component {
-    state = {  }
+const TodoItem = props => {
+  const { id, item, removeTodoItem, editTodoItem, markTodoItemDone } = props;
 
-    handleRemoveBtnClick = () => this.props.removeTodoItem(this.props.id)
+  const handleRemoveBtnClick = () => removeTodoItem(id);
 
-    handleEditBtnClick = () => this.props.editTodoItem(this.props.id)
+  const handleEditBtnClick = () => editTodoItem(id);
 
-    handleDoneBtnClick = () => this.props.markTodoItemDone(this.props.id)
+  const handleDoneBtnClick = () => markTodoItemDone(id);
 
-    render() { 
-        return ( 
-            <div>
-                <div>
-                    <button onClick={this.handleEditBtnClick}>edit</button>
-                    <button onClick={this.handleRemoveBtnClick}>remove</button>
-                    <button onClick={this.handleDoneBtnClick}>done</button>
-                </div>
-                <div>
-                
-                <p>{this.props.item}</p>
-                </div>
-            </div>
-         );
-    }
-}
- 
+  return (
+    <div>
+      <div>
+        <button onClick={handleEditBtnClick}>edit</button>
+        <button onClick={handleRemoveBtnClick}>remove</button>
+        <button onClick={handleDoneBtnClick}>done</button>
+      </div>
+      <div>
+        <p>{item}</p>
+      </div>
+    </div>
+  );
+};
+
 export default TodoItem;

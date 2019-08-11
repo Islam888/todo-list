@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import TodoInput from './components/TodoInput'
-import TodoList from './components/TodosList'
-import sha256  from 'sha-256-js'
-import './App.css';
+import React, { Component } from "react";
+import TodoInput from "./components/TodoInput";
+import TodoList from "./components/TodosList";
+import sha256 from "sha-256-js";
+import "./App.css";
 
 class App extends Component {
-  state = { 
+  state = {
     //List of todoItems objects
-    todoItems: [],
-  }
+    todoItems: []
+  };
 
   //function invoked after click of Add button to add and show a new todo
   showAddedTodoItem = (task, isImportant, isUrgent, date) => {
@@ -18,33 +18,33 @@ class App extends Component {
         isImportant,
         isUrgent,
         isDone: false,
-        date, 
+        date,
         id: sha256(new Date().toString()), //hashing of the time to get unique id.
         editMode: false
       })
-    }))
-  } 
+    }));
+  };
 
   //remove todo item by filtering out the item which has an id equal to the id of the item with clicked remove button
-  removeTodoItem = (id) => {
+  removeTodoItem = id => {
     this.setState(prevState => ({
       todoItems: prevState.todoItems.filter(item => item.id !== id)
-    }))
-  }
+    }));
+  };
 
-  //Change the editMode value to true of the item with id of the item edit button clicked 
-  editTodoItem = (id) => {
+  //Change the editMode value to true of the item with id of the item edit button clicked
+  editTodoItem = id => {
     this.setState(prevState => ({
       todoItems: prevState.todoItems.map(item => {
         if (item.id === id) {
           item.editMode = true;
-          return item
+          return item;
         } else {
-          return item
+          return item;
         }
       })
-    }))
-  }
+    }));
+  };
 
   //edit the selected item with the new values
   showEditedTodoItem = (task, isImportant, isUrgent, date) => {
@@ -56,28 +56,27 @@ class App extends Component {
           item.isUrgent = isUrgent;
           item.date = date;
           item.editMode = false; //return back editMode value to false to swipe the TodoEdit component with the TodoItem one.
-          return item
+          return item;
         } else {
-          return item
+          return item;
         }
       })
-    }))
-
-  }
+    }));
+  };
 
   // To mark an item as done. The function switches isDone to true
-  markDone = (id) => {
+  markDone = id => {
     this.setState(prevState => ({
       todoItems: prevState.todoItems.map(item => {
         if (item.id === id) {
-          item.isDone = true
-          return item
+          item.isDone = true;
+          return item;
         } else {
-          return item
+          return item;
         }
       })
-    }))
-  }
+    }));
+  };
 
   render() {
     const { todoItems } = this.state;
@@ -85,8 +84,8 @@ class App extends Component {
     return (
       <div className="App">
         <TodoInput addTodoItem={this.showAddedTodoItem} />
-        <TodoList 
-          todoItems={todoItems} 
+        <TodoList
+          todoItems={todoItems}
           removeTodoItem={this.removeTodoItem}
           editTodoItem={this.editTodoItem}
           addEditedTodoItem={this.showEditedTodoItem}
