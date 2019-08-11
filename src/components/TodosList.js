@@ -11,6 +11,7 @@ const TodoList = (props) => {
                         <li>
                             {
                                 item.editMode ? (<TodoEdit 
+                                                    key={item.id}
                                                     addTodoItem={props.addEditedTodoItem}    
                                                 />) : (
                                     <TodoItem  
