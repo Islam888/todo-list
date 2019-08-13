@@ -49,7 +49,7 @@ const TodoInput = props => {
   };
 
   return (
-    <div>
+    <div className="todos-wrapper">
       <input
         type="text"
         id="todoInput"
@@ -59,10 +59,30 @@ const TodoInput = props => {
       <button id="add-button" onClick={handleClick}>
         Add
       </button>
-      <input type="checkbox" id="important" name="priority" />
-      <label htmlFor="important">important</label>
-      <input type="checkbox" id="urgent" name="priority" />
-      <label htmlFor="urgent">urgent</label>
+      <div className="checkbox-wrapper">
+        {/* <input type="checkbox" id="important" name="priority" />
+        <label htmlFor="important">important</label> */}
+        {/* <input type="checkbox" id="urgent" name="priority" />
+        <label htmlFor="urgent">urgent</label> */}
+        <label className="control control-checkbox" htmlFor="important">
+          important
+          <input
+            type="checkbox"
+            id="important"
+            name="priority"
+          />
+          <div className="control_indicator" />
+        </label>
+        <label className="control control-checkbox" htmlFor="urgent">
+          urgent
+          <input
+            type="checkbox"
+            id="urgent"
+            name="priority"
+          />
+          <div className="control_indicator" />
+        </label>
+      </div>
     </div>
   );
 };
