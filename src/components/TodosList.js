@@ -8,10 +8,9 @@ const TodoList = props => {
     <div>
       <ul>
         {props.todoItems.map(item => (
-          <li>
+          <li key={item.id} id={item.id}>
             {item.editMode ? (
               <TodoEdit
-                key={item.id}
                 addTodoItem={addEditedTodoItem}
                 value={item.task}
                 important={item.isImportant}
@@ -19,8 +18,7 @@ const TodoList = props => {
               />
             ) : (
               <TodoItem
-                key={item.id}
-                id={item.id}
+                itemId={item.id}
                 item={item.task}
                 important={item.isImportant}
                 urgent={item.isUrgent}
