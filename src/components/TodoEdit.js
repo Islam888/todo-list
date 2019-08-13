@@ -1,7 +1,7 @@
 import React from "react";
 
 const TodoEdit = props => {
-  const { value } = props;
+  const { value, important, urgent } = props;
   const handleClick = e => {
     e.preventDefault();
     const inputItemValue = document.getElementById("todoEdit").value;
@@ -60,7 +60,7 @@ const TodoEdit = props => {
         <button id="edit-button" onClick={handleClick}>
           Add
         </button>
-        <input
+        {/* <input
           type="checkbox"
           id="important-edit"
           name="priority"
@@ -73,7 +73,33 @@ const TodoEdit = props => {
           name="priority"
           defaultChecked={props.urgent}
         />
-        <label htmlFor="urgent-edit">urgent</label>
+        <label htmlFor="urgent-edit">urgent</label> */}
+        <div className="checkbox-wrapper">
+        {/* <input type="checkbox" id="important" name="priority" />
+        <label htmlFor="important">important</label> */}
+        {/* <input type="checkbox" id="urgent" name="priority" />
+        <label htmlFor="urgent">urgent</label> */}
+        <label className="control control-checkbox" htmlFor="important-edit">
+          important
+          <input
+            type="checkbox"
+            id="important-edit"
+            name="priority"
+            defaultChecked={important}
+          />
+          <div className="control_indicator" />
+        </label>
+        <label className="control control-checkbox" htmlFor="urgent-edit">
+          urgent
+          <input
+            type="checkbox"
+            id="urgent-edit"
+            name="priority"
+            defaultChecked={urgent}
+          />
+          <div className="control_indicator" />
+        </label>
+      </div>
       </div>
     </div>
   );
