@@ -5,6 +5,13 @@ import sha256 from "sha-256-js";
 import "./App.css";
 
 class App extends Component {
+  componentDidUpdate() {
+
+    const isImportant = this.state.todoItems[0].isImportant
+    const isUrgent = this.state.todoItems[0].isUrgent
+    const id = this.state.todoItems[0].id
+    this.addBorderColor(isImportant, isUrgent, id)
+  }
   state = {
     //List of todoItems objects
     todoItems: []
@@ -12,18 +19,37 @@ class App extends Component {
 
   //function invoked after click of Add button to add and show a new todo
   showAddedTodoItem = (task, isImportant, isUrgent, date) => {
+    const id = sha256(new Date().toString()) //hashing of the time to get unique id.
     this.setState(prevState => ({
-      todoItems: prevState.todoItems.concat({
+      todoItems: [{
         task,
         isImportant,
         isUrgent,
         isDone: false,
         date,
-        id: sha256(new Date().toString()), //hashing of the time to get unique id.
+        id, 
         editMode: false
-      })
+      }].concat(prevState.todoItems)
     }));
+    
   };
+
+  addBorderColor = (isImportant, isUrgent, id) => {
+    const listElem = document.getElementById(id)
+    if (isImportant && isUrgent) {
+      listElem.classList.remove('blue', 'orange', 'green', 'red')
+      listElem.classList.add('red')
+    } else if (isImportant) {
+      listElem.classList.remove('blue', 'orange', 'green', 'red')
+      listElem.classList.add('blue')
+    } else if (isUrgent) {
+      listElem.classList.remove('blue', 'orange', 'green', 'red')
+      listElem.classList.add('orange')
+    } else {
+      listElem.classList.remove('blue', 'orange', 'green', 'red')
+      listElem.classList.add('green')
+    }
+  }
 
   //remove todo item by filtering out the item which has an id equal to the id of the item with clicked remove button
   removeTodoItem = id => {
@@ -65,12 +91,38 @@ class App extends Component {
   };
 
   // To mark an item as done. The function switches isDone to true
-  markDone = id => {
+  markDone = (isChecked, id) => {
     this.setState(prevState => ({
       todoItems: prevState.todoItems.map(item => {
-        if (item.id === id) {
+        /* if (item.id === id && isChecked) {
           item.isDone = true;
+          const para = document.getElementById(`task-text-${id}`)
+          const task = document.getElementById(`task-text-${id}`).textContent
+          para.innerHTML = `<del>${task}</del>`
           return item;
+        } else if  (item.id === id && !isChecked){
+          item.isDone = false;
+          const para = document.getElementById(`task-text-${id}`)
+          const task = document.getElementById(`task-text-${id}`).textContent
+          para.innerHTML = `${task}`
+          return item;
+        } else {
+          return item;
+        } */
+        if (item.id === id) {
+          if (isChecked) {
+            item.isDone = true;
+            const para = document.getElementById(`task-text-${id}`)
+            const task = document.getElementById(`task-text-${id}`).textContent
+            para.innerHTML = `<del>${task}</del>`
+            return item;
+          } else {
+            item.isDone = false;
+            const para = document.getElementById(`task-text-${id}`)
+            const task = document.getElementById(`task-text-${id}`).textContent
+            para.innerHTML = `${task}`
+            return item;
+          }
         } else {
           return item;
         }
