@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodosList";
+import Header from "./components/Header"
 import sha256 from "sha-256-js";
+import firebase from "./firebase"
+import "firebase/auth"
+import "firebase/firestore";
 import "./App.css";
 
 class App extends Component {
+  componentDidMount() {
+    console.log(firebase.auth())
+  }
   state = {
     //List of todoItems objects
     todoItems: []
@@ -127,19 +134,26 @@ class App extends Component {
     }));
   };
 
+  login = () => {
+    
+  }
+
   render() {
     const { todoItems } = this.state;
 
     return (
       <div className="App">
-        <TodoInput addTodoItem={this.showAddedTodoItem} />
-        <TodoList
-          todoItems={todoItems}
-          removeTodoItem={this.removeTodoItem}
-          editTodoItem={this.editTodoItem}
-          addEditedTodoItem={this.showEditedTodoItem}
-          markDone={this.markDone}
-        />
+        <Header login={this.login} />
+        <div className="todos-wrapper">
+          <TodoInput addTodoItem={this.showAddedTodoItem} />
+          <TodoList
+            todoItems={todoItems}
+            removeTodoItem={this.removeTodoItem}
+            editTodoItem={this.editTodoItem}
+            addEditedTodoItem={this.showEditedTodoItem}
+            markDone={this.markDone}
+          />
+        </div>
       </div>
     );
   }
