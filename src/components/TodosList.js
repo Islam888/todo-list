@@ -15,6 +15,7 @@ const TodoList = props => {
                 value={item.task}
                 important={item.isImportant}
                 urgent={item.isUrgent}
+                itemId={item.id}
               />
             ) : (
               <TodoItem
