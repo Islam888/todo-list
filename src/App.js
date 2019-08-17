@@ -5,13 +5,6 @@ import sha256 from "sha-256-js";
 import "./App.css";
 
 class App extends Component {
-  componentDidUpdate() {
-
-    const isImportant = this.state.todoItems[0].isImportant
-    const isUrgent = this.state.todoItems[0].isUrgent
-    const id = this.state.todoItems[0].id
-    this.addBorderColor(isImportant, isUrgent, id)
-  }
   state = {
     //List of todoItems objects
     todoItems: []
@@ -31,8 +24,10 @@ class App extends Component {
         editMode: false
       }].concat(prevState.todoItems)
     }));
-    
+    setTimeout(() => this.addBorderColor(isImportant, isUrgent, id), 0 )
   };
+
+
 
   addBorderColor = (isImportant, isUrgent, id) => {
     const listElem = document.getElementById(id)
@@ -73,7 +68,7 @@ class App extends Component {
   };
 
   //edit the selected item with the new values
-  showEditedTodoItem = (task, isImportant, isUrgent, date) => {
+  showEditedTodoItem = (task, isImportant, isUrgent, date, id) => {
     this.setState(prevState => ({
       todoItems: prevState.todoItems.map(item => {
         if (item.editMode) {
@@ -82,12 +77,14 @@ class App extends Component {
           item.isUrgent = isUrgent;
           item.date = date;
           item.editMode = false; //return back editMode value to false to swipe the TodoEdit component with the TodoItem one.
+          item.id = id;
           return item;
         } else {
           return item;
         }
       })
     }));
+    this.addBorderColor(isImportant, isUrgent, id)
   };
 
   // To mark an item as done. The function switches isDone to true
