@@ -16,26 +16,26 @@ const TodoItem = props => {
 
   return (
     <div>
-      <div>
-        
-        
 
-      </div>
       <div className="todo-item">
-      <label className="control control-checkbox">
-          <input
-            type="checkbox"
-            id="done"
-            name="priority"
-            onChange={handleDoneCheckboxClick}
-          />
-          <div className="control_indicator rounded-checkbox" />
-        </label>
-        <p className="task-text" id={`task-text-${itemId}`}>{item}</p>
-        
-        <button className="remove-button" onClick={handleRemoveBtnClick}><img src={remove}  alt="remove" /></button>
-        <button className="edit-button" onClick={handleEditBtnClick}><img src={edit} alt="edit" /></button>
-        
+        <div className="done-checkbox-wrapper">
+          <label className="control control-checkbox">
+            <input
+              type="checkbox"
+              id="done"
+              name="priority"
+              onChange={handleDoneCheckboxClick}
+            />
+            <div className="control_indicator rounded-checkbox" />
+          </label>
+        </div>
+        <div className="task-text-wrapper">
+          <p className="task-text" id={`task-text-${itemId}`}>{item}</p>
+        </div>
+        <div className="edit-remove-btn-wrapper">
+          <button className="remove-button" onClick={handleRemoveBtnClick}><img src={remove}  alt="remove" /></button>
+          <button className="edit-button" onClick={handleEditBtnClick}><img src={edit} alt="edit" /></button>
+        </div>
       </div>
     </div>
   );
