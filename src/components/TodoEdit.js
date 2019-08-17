@@ -55,7 +55,7 @@ const TodoEdit = props => {
 
   return (
     <div>
-      <div>
+      <div className="todo-input-wrapper">
         <input
           type="text"
           id="todoEdit"

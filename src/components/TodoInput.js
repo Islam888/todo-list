@@ -49,16 +49,18 @@ const TodoInput = props => {
   };
 
   return (
-    <div className="todos-wrapper">
-      <input
-        type="text"
-        id="todoInput"
-        onKeyDown={handleKeyDown}
-        placeholder="Add todo"
-      />
-      <button id="add-button" onClick={handleClick}>
-        Add
-      </button>
+    <div>
+      <div className="todo-input-wrapper">
+        <input
+          type="text"
+          id="todoInput"
+          onKeyDown={handleKeyDown}
+          placeholder="Add todo"
+        />
+        <button id="add-button" onClick={handleClick}>
+          Add
+        </button>
+      </div>
       <div className="checkbox-wrapper">
         {/* <input type="checkbox" id="important" name="priority" />
         <label htmlFor="important">important</label> */}
