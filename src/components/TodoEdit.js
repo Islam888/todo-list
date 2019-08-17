@@ -1,7 +1,9 @@
 import React from "react";
+import sha256 from "sha-256-js";
 
 const TodoEdit = props => {
-  const { value, important, urgent } = props;
+  const { value, important, urgent, itemId, addTodoItem } = props;
+  
   const handleClick = e => {
     e.preventDefault();
     const inputItemValue = document.getElementById("todoEdit").value;
@@ -16,11 +18,13 @@ const TodoEdit = props => {
         .toJSON()
         .slice(0, 10)
         .replace(/-/g, "/");
-      return props.addTodoItem(
+      const id = itemId;
+      return addTodoItem(
         inputItemValue,
         importantCheckValue,
         urgentCheckValue,
-        date
+        date,
+        id
       );
     }
   };
@@ -36,11 +40,13 @@ const TodoEdit = props => {
         .toJSON()
         .slice(0, 10)
         .replace(/-/g, "/");
+      const id = sha256(new Date().toString())
       return props.addTodoItem(
         inputItemValue,
         importantCheckValue,
         urgentCheckValue,
-        date
+        date,
+        id
       );
     } else {
       return;
